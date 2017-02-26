@@ -4,15 +4,21 @@
 pub fn as_bal_ter(frm: i32) -> String {
     helper(frm, 1)
 }
-pub fn helper(frm: i32, _mul: i32) -> String {
-    if frm == 0 {
-        return String::from("0")
-    }
+pub fn helper(frm: i32, mul: i32) -> String {
+    let mut out = if mul < frm.abs() {
+        helper(frm, mul*3)
+    } else {
+        String::from("")
+    };
 
-    if frm > 0 {
-        return String::from("+")
-    }
-    return String::from("-")
+    out.push_str(if frm == 0 {
+        "0"
+    } else if frm > 0 {
+        "+"
+    } else {
+        "-"
+    });
+    out
 }
 
 #[cfg(test)]
