@@ -28,5 +28,9 @@ fn one_is_plus() {
 fn minus_is_dash() {
     assert_eq!(as_bal_ter(-1), "-");
 }
+#[test]
+fn three_is_ten() {
+    assert_eq!(as_bal_ter(3), "10");
+}
 
 }
