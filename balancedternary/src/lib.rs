@@ -42,11 +42,22 @@ fn one_is_plus() {
 fn minus_is_dash() {
     assert_eq!(as_bal_ter(-1), "-");
 }
-//*
 #[test]
 fn three_is_ten() {
     assert_eq!(as_bal_ter(3), "+0");
 }
+#[test]
+fn nine_is_hundred() {
+    assert_eq!(as_bal_ter(9), "+00");
+}
+#[test]
+fn my_nine_is_dashded() {
+    assert_eq!(as_bal_ter(-9), "-00");
+}
+
+
+
+//*
 // */
 
 }
