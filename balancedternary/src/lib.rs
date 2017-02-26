@@ -6,7 +6,10 @@ pub fn as_bal_ter(frm: i32) -> String {
         return String::from("0")
     }
 
-    return String::from("+")
+    if frm > 0 {
+        return String::from("+")
+    }
+    return String::from("-")
 }
 
 #[cfg(test)]
@@ -20,6 +23,10 @@ fn null_is() {
 #[test]
 fn one_is_plus() {
     assert_eq!(as_bal_ter(1), "+");
+}
+#[test]
+fn minus_is_dash() {
+    assert_eq!(as_bal_ter(-1), "-");
 }
 
 }
