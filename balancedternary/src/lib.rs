@@ -1,7 +1,7 @@
 
 pub fn helper(frm: &mut i32, mul: i32) -> String {
     println!("+  {:?}", (&frm, &mul));
-    let mut out = if mul < frm.abs() {
+    let mut out = if frm.abs() != mul && mul < 3*frm.abs()-1 {
         helper(frm, mul*3)
     } else {
         String::from("")
@@ -54,10 +54,14 @@ fn nine_is_hundred() {
 fn my_nine_is_dashded() {
     assert_eq!(as_bal_ter(-9), "-00");
 }
+/*
+#[test]
+fn center_city_is_ooneo() {
+    assert_eq!(as_bal_ter(10), "+0+");
+}
 
 
 
-//*
 // */
 
 }
