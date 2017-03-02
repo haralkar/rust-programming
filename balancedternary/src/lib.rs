@@ -1,7 +1,7 @@
 
 pub fn helper(frm: &mut i32, mul: i32) -> String {
-    println!("+  {:?}", (&frm, &mul));
-    let mut out = if frm.abs() != mul && mul < 3*frm.abs()-1 {
+    println!("+  {:?}", (&frm, &mul,3*mul.clone()/2 ));
+    let mut out = if frm.abs() != mul && 3*mul/2 < frm.abs() {
         helper(frm, mul*3)
     } else {
         String::from("")
@@ -54,9 +54,18 @@ fn nine_is_hundred() {
 fn my_nine_is_dashded() {
     assert_eq!(as_bal_ter(-9), "-00");
 }
+#[test]
+fn thirteen_all_pos() {
+    assert_eq!(as_bal_ter(13), "+++");
+}
+#[test]
+fn five_with_two_dashes() {
+    assert_eq!(as_bal_ter(5), "+--");
+}
+
 /*
 #[test]
-fn center_city_is_ooneo() {
+fn center_city_is_oneoone() {
     assert_eq!(as_bal_ter(10), "+0+");
 }
 
