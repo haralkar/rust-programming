@@ -8,7 +8,9 @@ pub fn helper(frm: &mut i32, mul: i32) -> String {
     };
     println!(" + {:?}", (&frm, &mul));
 
-    out.push_str(if *frm < 0 {
+    out.push_str( if frm.abs() <= mul/2 {
+        "0"
+    } else if *frm < 0 {
         *frm += mul;
         "-"
     } else if *frm > 0 {
@@ -63,7 +65,7 @@ fn five_with_two_dashes() {
     assert_eq!(as_bal_ter(5), "+--");
 }
 
-/*
+//*
 #[test]
 fn center_city_is_oneoone() {
     assert_eq!(as_bal_ter(10), "+0+");
