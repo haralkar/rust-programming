@@ -1,12 +1,10 @@
 
 pub fn helper(frm: &mut i32, mul: i32) -> String {
-    println!("+  {:?}", (&frm, &mul,3*mul.clone()/2 ));
     let mut out = if frm.abs() != mul && 3*mul/2 < frm.abs() {
         helper(frm, mul*3)
     } else {
         String::from("")
     };
-    println!(" + {:?}", (&frm, &mul));
 
     out.push_str( if frm.abs() <= mul/2 {
         "0"
@@ -19,11 +17,9 @@ pub fn helper(frm: &mut i32, mul: i32) -> String {
     } else {
         "0"
     });
-    println!("  +{:?}", (&frm, &mul, &out));
     out
 }
 pub fn as_bal_ter(frm: i32) -> String {
-    println!("\nfrom, multipl");
     let mut from = frm;
     helper(&mut from, 1)
 }
@@ -81,4 +77,5 @@ fn eleven_is_ttn() {
 fn dashodash_dark_city() {
     assert_eq!(as_bal_ter(-10), "-0-");
 }
+
 }
