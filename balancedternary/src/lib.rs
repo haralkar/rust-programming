@@ -65,14 +65,26 @@ fn five_with_two_dashes() {
     assert_eq!(as_bal_ter(5), "+--");
 }
 
-//*
 #[test]
 fn center_city_is_oneoone() {
     assert_eq!(as_bal_ter(10), "+0+");
 }
+#[test]
+fn eigth_is_dashing() {
+    assert_eq!(as_bal_ter(8), "+0-");
+}
+#[test]
+fn eleven_is_ttn() {
+    assert_eq!(as_bal_ter(11), "++-");
+}
+#[test]
+fn dashodash_dark_city() {
+    assert_eq!(as_bal_ter(-10), "-0-");
+}
 
 
 
+//*
 // */
 
 }
