@@ -19,6 +19,7 @@ pub fn helper(frm: &mut i32, mul: i32) -> String {
     });
     out
 }
+
 pub fn as_bal_ter(frm: i32) -> String {
     let mut from = frm;
     helper(&mut from, 1)
