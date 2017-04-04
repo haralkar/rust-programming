@@ -1,0 +1,6 @@
+[package]
+name = "bowlingkata"
+version = "0.1.0"
+authors = ["Haraldur Karlsson <haralkar@gmail.com>"]
+
+[dependencies]
