@@ -30,11 +30,11 @@ impl Bowls for Bowling {
 
             score += 
                 match (sl[0], sl[1], sl[2]) {
-                 (10,bo,nus) => {
+                 (10, bo,nus) => {
                          skip=false;
-                         10+bo+nus
+                         10+ bo+nus
                      }
-                 (sp,are,bonus) if sp+are==10 => 10+bonus,
+                 (sp,are, bonus) if sp+are==10 => 10+bonus,
                  (a,b,_) => a+b,
                 };
         }
