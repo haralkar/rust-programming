@@ -11,7 +11,24 @@ impl Bowls for Bowling {
         self.pin.push(p);
     }
     fn score(&self)->usize {
-        self.pin.iter().sum()
+        let mut score = 0;
+        let mut skip = false;
+        let mut to_score = self.pin.clone();
+        to_score.push(0);
+        to_score.push(0);
+        for sl in to_score.windows(3) {
+            if skip {
+                skip=false;
+                continue;
+            }
+            skip=true;
+            score += 
+                match sl[0] + sl[1] {
+                 10 => 10 + sl[2],
+                  a => a,
+                };
+        }
+        score
     }
 }
 
@@ -54,7 +71,7 @@ fn all_ones() {
     let bowl = Bowling::new().roll_many(1, 20);
     assert_eq!(bowl.score(), 20);
 }
-/*
+//*
 #[test]
 fn spare() {
     let bowl = Bowling::new().spare().roll_many(1, 18);
