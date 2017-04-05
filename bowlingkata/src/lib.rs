@@ -25,7 +25,7 @@ impl Bowls for Bowling {
             }
             skip=true;
             frame += 1;
-            if frame > 10 { break ; }
+            if frame > 10 { return score }
 
             score += 
                 match (sl[0], sl[1], sl[2]) {
