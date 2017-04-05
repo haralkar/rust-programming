@@ -13,25 +13,27 @@ impl Bowls for Bowling {
     fn score(&self)->usize {
         let mut score = 0;
         let mut skip = false;
+        let mut frame = 0;
+
         let mut to_score = self.pin.clone();
         to_score.push(0);
         to_score.push(0);
-        let mut frame = 0;
         for sl in to_score.windows(3) {
             if skip {
                 skip=false;
                 continue;
             }
+            skip=true;
             frame += 1;
             if frame > 10 { break ; }
-            skip=true;
+
             score += 
                 match (sl[0], sl[1], sl[2]) {
                  (10,b1,b2) => {
                          skip=false;
                          10+b1+b2
                      }
-                 (s,p,b) if s+p==10 => 10+b,
+                 (sp,are,bonus) if sp+are==10 => 10+bonus,
                  (a,b,_) => a+b,
                 };
         }
