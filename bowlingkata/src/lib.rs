@@ -24,6 +24,7 @@ fn new_one() {
 }
 trait RollMany : Bowls {
     fn roll_many(self, p:usize, rolls:usize) -> Self;
+    fn spare(self) -> Self;
 }
 impl RollMany for Bowling {
     fn roll_many(mut self, p:usize, rolls:usize) -> Bowling {
@@ -31,6 +32,11 @@ impl RollMany for Bowling {
             0 => self,
             a => { self.roll(p); self.roll_many(p,a-1) }
         }
+    }
+    fn spare(mut self) -> Self {
+        self.roll(4);
+        self.roll(6);
+        self
     }
 }
 
@@ -42,5 +48,10 @@ fn gutter_game() {
 #[test]
 fn all_ones() {
     let bowl = Bowling::new().roll_many(1, 20);
+    assert_eq!(bowl.score(), 20);
+}
+#[test]
+fn spare() {
+    let bowl = Bowling::new().spare().roll_many(1, 20);
     assert_eq!(bowl.score(), 20);
 }
