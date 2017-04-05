@@ -23,9 +23,13 @@ impl Bowls for Bowling {
             }
             skip=true;
             score += 
-                match sl[0] + sl[1] {
-                 10 => 10 + sl[2],
-                  a => a,
+                match (sl[0], sl[1], sl[2]) {
+                 (10,b1,b2) => {
+                         skip=false;
+                         10+b1+b2
+                     }
+                 (s,p,b) if s+p==10 => 10+b,
+                 (a,b,_) => a+b,
                 };
         }
         score
@@ -46,6 +50,7 @@ fn new_one() {
 trait RollMany : Bowls {
     fn roll_many(self, p:usize, rolls:usize) -> Self;
     fn spare(self) -> Self;
+    fn strike(self) -> Self;
 }
 impl RollMany for Bowling {
     fn roll_many(mut self, p:usize, rolls:usize) -> Bowling {
@@ -53,6 +58,10 @@ impl RollMany for Bowling {
             0 => self,
             a => { self.roll(p); self.roll_many(p,a-1) }
         }
+    }
+    fn strike(mut self) -> Self {
+        self.roll(10);
+        self
     }
     fn spare(mut self) -> Self {
         self.roll(4);
@@ -71,10 +80,16 @@ fn all_ones() {
     let bowl = Bowling::new().roll_many(1, 20);
     assert_eq!(bowl.score(), 20);
 }
-//*
 #[test]
 fn spare() {
     let bowl = Bowling::new().spare().roll_many(1, 18);
     assert_eq!(bowl.score(), 29);
 }
+#[test]
+fn strike() {
+    let bowl = Bowling::new().strike().roll_many(1, 18);
+    assert_eq!(bowl.score(), 30);
+}
+
+//*
 // */
