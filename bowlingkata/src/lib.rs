@@ -24,14 +24,15 @@ impl Bowls for Bowling {
                 continue;
             }
             skip=true;
+
             frame += 1;
             if frame > 10 { return score }
 
             score += 
                 match (sl[0], sl[1], sl[2]) {
-                 (10,b1,b2) => {
+                 (10,bo,nus) => {
                          skip=false;
-                         10+b1+b2
+                         10+bo+nus
                      }
                  (sp,are,bonus) if sp+are==10 => 10+bonus,
                  (a,b,_) => a+b,
