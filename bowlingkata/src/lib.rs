@@ -16,11 +16,14 @@ impl Bowls for Bowling {
         let mut to_score = self.pin.clone();
         to_score.push(0);
         to_score.push(0);
+        let mut frame = 0;
         for sl in to_score.windows(3) {
             if skip {
                 skip=false;
                 continue;
             }
+            frame += 1;
+            if frame > 10 { break ; }
             skip=true;
             score += 
                 match (sl[0], sl[1], sl[2]) {
@@ -89,6 +92,11 @@ fn spare() {
 fn strike() {
     let bowl = Bowling::new().strike().roll_many(1, 18);
     assert_eq!(bowl.score(), 30);
+}
+#[test]
+fn perfect_game() {
+    let bowl = Bowling::new().roll_many(10, 12);
+    assert_eq!(bowl.score(), 300);
 }
 
 //*
