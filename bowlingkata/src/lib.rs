@@ -10,13 +10,19 @@ struct BowlingScore {
     score:usize,
     skip:bool,
     frame:usize,
+    pins:Vec<usize>,
 }
 impl BowlingScore {
-    fn new() -> BowlingScore {
+    fn new(p:&Vec<usize>) -> BowlingScore {
+        let mut ps = p.clone();
+        ps.push(0);
+        ps.push(0);
+
         BowlingScore {
             score:0,
             skip:false,
             frame:0,
+            pins:ps,
         }
     }
     fn no_skip(&mut self) {
@@ -35,12 +41,9 @@ impl Bowls for Bowling {
         self.pin.push(p);
     }
     fn score(&self)->usize {
-        let mut score = BowlingScore::new();
+        let mut score = BowlingScore::new(&self.pin);
 
-        let mut to_score = self.pin.clone();
-        to_score.push(0);
-        to_score.push(0);
-        for sl in to_score.windows(3) {
+        for sl in score.pins.clone().windows(3) {
             if score.skip {
                 score.no_skip();
                 continue;
