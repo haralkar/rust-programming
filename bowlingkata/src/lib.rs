@@ -6,39 +6,60 @@ trait Bowls {
     fn roll(&mut self, p: usize);
     fn score(&self)->usize {0}
 }
+struct BowlingScore {
+    score:usize,
+    skip:bool,
+    frame:usize,
+}
+impl BowlingScore {
+    fn new() -> BowlingScore {
+        BowlingScore {
+            score:0,
+            skip:false,
+            frame:0,
+        }
+    }
+    fn no_skip(&mut self) {
+        self.skip=false;
+    }
+    fn next_frame(&mut self) {
+        self.frame += 1;
+        self.skip = true;
+    }
+    fn done(&self) -> bool {
+        self.frame > 10
+    }
+}
 impl Bowls for Bowling {
     fn roll(&mut self, p: usize) {
         self.pin.push(p);
     }
     fn score(&self)->usize {
-        let mut score = 0;
-        let mut skip = false;
-        let mut frame = 0;
+        let mut score = BowlingScore::new();
 
         let mut to_score = self.pin.clone();
         to_score.push(0);
         to_score.push(0);
         for sl in to_score.windows(3) {
-            if skip {
-                skip=false;
+            if score.skip {
+                score.no_skip();
                 continue;
             }
-            skip=true;
+            score.next_frame();
 
-            frame += 1;
-            if frame > 10 { return score }
+            if score.done() { return score.score }
 
-            score += 
+            score.score += 
                 match (sl[0], sl[1], sl[2]) {
                  (10, bo,nus) => {
-                         skip=false;
+                         score.no_skip();
                          10+ bo+nus
                      }
                  (sp,are, bonus) if sp+are==10 => 10+bonus,
                  (a,b,_) => a+b,
                 };
         }
-        score
+        score.score
     }
 }
 
