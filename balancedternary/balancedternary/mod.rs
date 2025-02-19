@@ -1,4 +1,4 @@
-//! balanced terary yay!
+//! balanced ternary yay!
 //!
 //!  ```
 //!  use balancedternary;
